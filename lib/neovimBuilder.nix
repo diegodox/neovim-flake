@@ -1,30 +1,24 @@
-{ pkgs, lib ? pkgs.lib, config, ...}:
-let
+{
+  pkgs,
+  lib ? pkgs.lib,
+  ...
+}: {config}: let
   neovimPlugins = pkgs.neovimPlugins;
 
   vimOptions = lib.evalModules {
     modules = [
-      { imports = [../modules]; }
-      config 
+      config
     ];
 
     specialArgs = {
-      inherit pkgs; 
+      inherit pkgs;
     };
   };
+in
+  pkgs.wrapNeovim pkgs.neovim-unwrapped {
+    viAlias = true;
+    vimAlias = true;
+    configure = {
 
-  vim = vimOptions.config.vim;
-
-in pkgs.wrapNeovim pkgs.neovim-nightly {
-  viAlias = true;
-  vimAlias = true;
-  configure = {
-    customRC = vim.configRC;
-
-    packages.myVimPackage = with pkgs.vimPlugins; {
-      start = vim.startPlugins;
-      opt = vim.optPlugins;
     };
-  };
-
-}
+  }
