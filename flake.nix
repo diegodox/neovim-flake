@@ -49,7 +49,7 @@
     };
 
     devShells.${system}.default = pkgs.mkShell {
-      buildInputs = [packages.${system}.nevoim-diegodox];
+      buildInputs = [packages.${system}.neovim-diegodox];
     };
 
     overlays.default = final: prev: {
