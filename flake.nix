@@ -22,23 +22,14 @@
     plugins = [
     ];
 
-    pluginOverlay = lib.buildPluginOverlay;
 
     pkgs = import nixpkgs {
       inherit system;
       config = {allowUnfree = true;};
       overlays = [
-        pluginOverlay
         inputs.neovim-nightly-overlay.overlay
-        (final: prev: {
-          rnix-lsp = inputs.rnix-lsp.defaultPackage.${system};
-        })
       ];
     };
-
-    lib = import ./lib {inherit pkgs inputs plugins;};
-
-    neovimBuilder = lib.neovimBuilder;
   in rec {
     apps.${system} = rec {
       nvim = {
@@ -53,17 +44,15 @@
     };
 
     overlays.default = final: prev: {
-      inherit neovimBuilder;
       neovim-diegodox = packages.${system}.neovim-diegodox;
       neovimPlugins = pkgs.neovimPlugins;
     };
 
     packages.${system} = rec {
       default = neovim-diegodox;
-      neovim-diegodox = neovimBuilder {
-        config = {
+      neovim-diegodox =
+        pkgs.wrapNeovim pkgs.neovim-unwrapped {
         };
-      };
     };
   };
 }
