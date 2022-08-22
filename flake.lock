@@ -55,11 +55,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1661143698,
-        "narHash": "sha256-OEe9zuu5PZ4D/0uTsWNqyXKy3+NCygy9FNuE4pgibi4=",
+        "lastModified": 1661147810,
+        "narHash": "sha256-2qWynywM25lYZ2GAWtgJB/IruqRGw/ieaL2GEzY0nlI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "d4d27c41b3298c25ae62bc067472bef37bc61c99",
+        "rev": "2bed0d1d978b42184564201088ea5fef12ec8581",
         "type": "github"
       },
       "original": {
@@ -149,7 +149,24 @@
       "inputs": {
         "neovim": "neovim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "vim-code-dark": "vim-code-dark"
+      }
+    },
+    "vim-code-dark": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659698930,
+        "narHash": "sha256-zcjnoFSjw1e+ICrmhnRDuGchQwJM1Ola3JojaCqADUM=",
+        "owner": "tomasiser",
+        "repo": "vim-code-dark",
+        "rev": "e56e5285ecaf5d0df1a383c432bccdbc0d464b2f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tomasiser",
+        "repo": "vim-code-dark",
+        "type": "github"
       }
     }
   },

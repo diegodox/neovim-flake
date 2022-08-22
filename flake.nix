@@ -8,18 +8,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # plugins
+    vim-code-dark = {
+      url = "github:tomasiser/vim-code-dark";
+      flake = false;
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     neovim,
+    vim-code-dark,
     ...
   } @ inputs: let
     system = "x86_64-linux";
 
-    # Plugin must be same as input name
-    plugins = [
+    # Plugin list must be same as input name
+    plugin-names = [
+      "vim-code-dark"
     ];
 
 
@@ -30,6 +37,17 @@
         inputs.neovim-nightly-overlay.overlay
       ];
     };
+
+    # build function of vim plugin which have name in inputs
+    buildPlug = name:
+      pkgs.vimUtils.buildVimPluginFrom2Nix {
+        pname = name;
+        version = "master";
+        src = builtins.getAttr name inputs;
+      };
+
+    # built plugin list
+    plugins = map (name: buildPlug name) plugin-names;
   in rec {
     apps.${system} = rec {
       nvim = {
@@ -50,9 +68,17 @@
 
     packages.${system} = rec {
       default = neovim-diegodox;
-      neovim-diegodox =
-        pkgs.wrapNeovim pkgs.neovim-unwrapped {
+      neovim-diegodox = pkgs.wrapNeovim pkgs.neovim-unwrapped {
+        configure = {
+          customRC = ''
+            colorscheme codedark
+          '';
+          packages.myVimPackage = {
+            start = plugins;
+            opt = [];
+          };
         };
+      };
     };
   };
 }
