@@ -21,20 +21,16 @@ vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>", { desc = "Enter to Normal mode f
 vim.keymap.set("n", "[w", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 vim.keymap.set("n", "]w", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 
-vim.keymap.set(
-    "n",
-    "[e",
-    function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
-    { desc = "Previous Error" }
-)
-vim.keymap.set(
-    "n",
-    "]e",
-    function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
-    { desc = "Next Error" }
-)
+vim.keymap.set("n", "[e", function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Previous Error" })
+vim.keymap.set("n", "]e", function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next Error" })
 
 -- Easy save
-vim.keymap.set("n", "<C-s>", function() vim.cmd("update") end, { desc = "write buffer" })
+vim.keymap.set("n", "<C-s>", function()
+	vim.cmd("update")
+end, { desc = "write buffer" })
 
 vim.cmd("source ~/.config/nvim/winresize.vim")

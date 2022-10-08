@@ -52,5 +52,5 @@ vim.g.mapleader = " "
 
 vim.g.transparent_bg = false
 vim.diagnostic.config({
-    update_in_insert = true,
+	update_in_insert = true,
 })
