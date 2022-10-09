@@ -18,9 +18,11 @@ vim.keymap.set("n", "<right>", "<nop>", { desc = "No arrowkeys, use hjkl" })
 -- Esc from terminal
 vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>", { desc = "Enter to Normal mode from Terminal mode" })
 
+-- Goto diagnostic keymap
 vim.keymap.set("n", "[w", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 vim.keymap.set("n", "]w", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 
+-- Goto error keymap
 vim.keymap.set("n", "[e", function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Previous Error" })

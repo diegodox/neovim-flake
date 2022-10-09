@@ -1,3 +1,5 @@
+require("rc.settings")
+require("rc.keymap")
 
 -- local group = vim.api.nvim_create_augroup("TestGroup", { clear = false })
 -- vim.api.nvim_create_autocmd("User", {
