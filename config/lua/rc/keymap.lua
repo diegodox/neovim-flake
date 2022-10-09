@@ -6,6 +6,7 @@ vim.keymap.set("n", "j", "gj", { desc = "Move by visual line" })
 vim.keymap.set("v", ">", ">gv", { desc = "Keep select while indenting" })
 vim.keymap.set("v", "<", "<gv", { desc = "Keep select while indenting" })
 
+-- Center cursor line after up/down half page
 vim.keymap.set("n", "<C-d>", "<C-d>zz", {})
 vim.keymap.set("n", "<C-u>", "<C-u>zz", {})
 
@@ -35,4 +36,9 @@ vim.keymap.set("n", "<C-s>", function()
 	vim.cmd("update")
 end, { desc = "write buffer" })
 
-vim.cmd("source ~/.config/nvim/winresize.vim")
+-- Winresizing
+for _, k in pairs({ "+", "-", ">", "<" }) do
+	vim.keymap.set("n", "<C-w>" .. k, "<C-w>" .. k .. "<Plug>(resize)", { silent = true, remap = true })
+	vim.keymap.set("n", "<Plug>(resize)" .. k, "<C-w>" .. k .. "<Plug>(resize)", { silent = true })
+end
+vim.keymap.set("n", "<Plug>(resize)", "<Nop>", { silent = true, remap = true })
